@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function shelfList() {
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_SHELF_ITEMS' });
-    }, []);
+
 
 
     const dispatch = useDispatch();
