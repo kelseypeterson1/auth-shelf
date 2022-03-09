@@ -6,7 +6,20 @@ const router = express.Router();
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-  res.sendStatus(200); // For testing only, can be removed
+  if (req.isAuthenticated()) {
+    console.log('/shelf GET route');
+    console.log('is authenticated?', req.isAuthenticated());
+    console.log('user', req.user);
+    let queryText = `SELECT * FROM "item" WHERE user_id = ${req.user.id}`;
+    pool.query(queryText).then((result) => {
+      res.send(result.rows);
+    }).catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+  } else {
+    res.sendStatus(403);
+  }
 });
 
 /**
@@ -43,6 +56,21 @@ router.get('/count', (req, res) => {
  */
 router.get('/:id', (req, res) => {
   // endpoint functionality
+  if (req.isAuthenticated()) {
+    console.log('/shelf/:id GET route');
+    console.log('is authenticated?', req.isAuthenticated());
+    console.log('user', req.user);
+    let queryText = `SELECT * FROM "item" WHERE user_id = ${req.user.id} AND id = ${req.params.id}`;
+    pool.query(queryText).then((result) => {
+      res.send(result.rows);
+    }).catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+  } else {
+    res.sendStatus(403);
+  }
+
 });
 
 module.exports = router;
