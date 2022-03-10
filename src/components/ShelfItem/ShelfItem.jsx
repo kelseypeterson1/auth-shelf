@@ -4,8 +4,6 @@ import React from 'react';
 
 function ShelfItem({item}) {
 
-console.log('item is:', item)
-
     return (
         <>
         <h3>{item.description}</h3>

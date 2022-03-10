@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ShelfItem from '../ShelfItem/ShelfItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function shelfList() {
 
-
-    
-    const dispatch = useDispatch();
     const shelf = useSelector(store => store.shelf);
     
-    console.log('in shelf list, shelf is:', shelf)
-
-
     return (
         <>
             {shelf.map((item, i) => {
