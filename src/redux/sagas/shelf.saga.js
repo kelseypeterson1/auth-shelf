@@ -19,7 +19,7 @@ function* fetchShelfItems() {
 
 function* shelfSaga() {
     yield takeEvery('FETCH_SHELF_ITEMS', fetchShelfItems)
-  }
+}
 
 
 export default fetchShelfItems;

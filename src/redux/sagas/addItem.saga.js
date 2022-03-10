@@ -5,7 +5,7 @@ import { takeEvery} from 'redux-saga/effects';
 // worker Saga: will be fired on "ADD_ITEM"
 function* setItem(action) {
 try { 
-    console.log('in saga, item sent is', action.payload)
+    console.log('in saga, item sent is', action.payload);
     yield axios.post(`/api/shelf`, action.payload);
     yield put({ type: 'SET_SHELF_ITEMS' })
 
@@ -14,7 +14,7 @@ try {
 }}
 
 function* addItem() {
-    yield takeEvery('ADD_ITEM', setItem)
+    yield takeEvery('ADD_ITEM', setItem);
 }
 
 export default addItem;
