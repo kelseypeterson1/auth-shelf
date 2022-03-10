@@ -7,7 +7,7 @@ function* setItem(action) {
 try { 
     console.log('in saga, item sent is', action.payload);
     yield axios.post(`/api/shelf`, action.payload);
-    yield put({ type: 'SET_SHELF_ITEMS' })
+    yield put({ type: 'FETCH_SHELF_ITEMS' })
 
 } catch (err) {
     console.log('POST error is', err);

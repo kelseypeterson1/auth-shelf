@@ -6,7 +6,7 @@ function ShelfPage() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_SHELF_ITEMS' });
-  }, []);
+  }, [dispatch]);
 
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -25,6 +25,9 @@ function ShelfPage() {
     }
 
     dispatch({type: 'ADD_ITEM', payload: bundledObject});
+
+    setDescription('');
+    setImageUrl('');
   }
 
   return (

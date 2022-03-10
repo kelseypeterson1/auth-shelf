@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 
 function ShelfItem({item}) {
+
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SHELF_ITEMS' });
+      }, [dispatch]);
 
     const dispatch = useDispatch();
 

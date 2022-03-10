@@ -6,7 +6,7 @@ function* deleteItem(action) {
     console.log('id', id);
     
     yield axios.delete(`/api/shelf/${id}`);
-    yield put({type: 'SET_SHELF_ITEMS'});
+    yield put({type: 'FETCH_SHELF_ITEMS'});
 }
 
 function* deleteItemSaga() {
