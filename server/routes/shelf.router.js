@@ -27,6 +27,19 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   // endpoint functionality
+  if (req.isAuthenticated()) {
+    console.log(req.body);
+    console.log('is authenticated?', req.isAuthenticated());
+    console.log('user', req.user);
+    let queryText = `INSERT INTO "item" ("description", "image_url", "user_id") 
+    VALUES ($1, $2, $3);`
+    pool.query(queryText, [req.body.description, req.body.image_url, req.user.id])
+      .then(result => res.sendStatus(201))
+      .catch(err => res.sendStatus(500));
+
+  } else {
+    res.sendStatus(403);
+  }
 });
 
 /**
