@@ -10,9 +10,9 @@ import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 import App from './components/App/App';
 
-function* rootSaga() {
-  yield takeEvery('FETCH_SHELF_ITEMS', fetchShelfItems)
-}
+// function* rootSaga() {
+//   yield takeEvery('FETCH_SHELF_ITEMS', fetchShelfItems)
+// }
 
 
 

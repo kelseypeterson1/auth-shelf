@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 function shelfList() {
 
 
-
-
+    
     const dispatch = useDispatch();
     const shelf = useSelector(store => store.shelf);
-
+    
+    console.log('in shelf list, shelf is:', shelf)
 
 
     return (

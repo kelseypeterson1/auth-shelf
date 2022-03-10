@@ -6,11 +6,13 @@ function ShelfPage() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_SHELF_ITEMS' });
+    // dispatch({ type: 'SET_SHELF_ITEMS', payload: {description: 'orange juice', image_url: 'dlkfjaldjf'} });
   }, []);
 
 
   const dispatch = useDispatch();
   const shelf = useSelector(store => store.shelf);
+  console.log(shelf)
 
   return (
     <div className="container">
