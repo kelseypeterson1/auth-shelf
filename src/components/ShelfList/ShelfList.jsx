@@ -3,6 +3,8 @@ import ShelfItem from '../ShelfItem/ShelfItem';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
+import './ShelfList.css';
+
 function shelfList() {
 
     const dispatch = useDispatch();
@@ -14,14 +16,14 @@ function shelfList() {
       }, []);
 
     return (
-        <>
+        <div className="shelfContainer">
             {shelf.map((item, i) => {
                 return (
                     <ShelfItem key={i} item={item} />
                 )
             })}
 
-        </>
+        </div>
     )
 }
 

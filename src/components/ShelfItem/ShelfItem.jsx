@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-
+import './ShelfItem.css';
 
 function ShelfItem({item}) {
 
@@ -17,11 +17,11 @@ function ShelfItem({item}) {
     }
 
     return (
-        <>
-        <h3>{item.description}</h3>
-        <img src ={item.image_url} />
-        <button onClick={handleDelete}>delete</button>
-        </>
+        <div className='shelfItemContainer'>
+            <h3>{item.description}</h3>
+            <img src ={item.image_url} />
+            <button onClick={handleDelete}>delete</button>
+        </div>
     )
 }
 
