@@ -1,5 +1,5 @@
 import axios from "axios";
-import { put, takeEvery } from "redux-saga/effects";
+import { put, takeEvery, takeLatest } from "redux-saga/effects";
 
 function* deleteItem(action) {
     const id = action.payload;
@@ -10,7 +10,7 @@ function* deleteItem(action) {
 }
 
 function* deleteItemSaga() {
-    yield takeEvery('DELETE_ITEM', deleteItem);
+    yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
 export default deleteItemSaga;

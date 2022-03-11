@@ -14,7 +14,7 @@ try {
 }}
 
 function* addItem() {
-    yield takeEvery('ADD_ITEM', setItem);
+    yield takeLatest('ADD_ITEM', setItem);
 }
 
 export default addItem;

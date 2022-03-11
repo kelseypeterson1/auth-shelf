@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ShelfList from '../ShelfList/ShelfList'
+import ShelfList from '../ShelfList/ShelfList';
+import './ShelfPage.css';
 
 function ShelfPage() {
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_SHELF_ITEMS' });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: 'FETCH_SHELF_ITEMS' });
+  // }, []);
 
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');

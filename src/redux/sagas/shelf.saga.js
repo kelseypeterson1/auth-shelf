@@ -18,8 +18,8 @@ function* fetchShelfItems() {
 }
 
 function* shelfSaga() {
-    yield takeEvery('FETCH_SHELF_ITEMS', fetchShelfItems)
+    yield takeLatest('FETCH_SHELF_ITEMS', fetchShelfItems)
 }
 
 
-export default fetchShelfItems;
+export default shelfSaga;

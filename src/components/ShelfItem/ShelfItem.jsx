@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 function ShelfItem({item}) {
 
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_SHELF_ITEMS' });
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_SHELF_ITEMS' });
+    //   }, []);
 
     const dispatch = useDispatch();
 
