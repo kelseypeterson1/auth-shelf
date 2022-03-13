@@ -1,13 +1,21 @@
+import req from 'express/lib/request';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ShelfList from '../ShelfList/ShelfList';
 import './ShelfPage.css';
 
+// // ========multer stuff===============
+// const multer  = require('multer')
+// const upload = multer({ dest: 'public/user' })
+
+// exports.uploadImage = upload.single('photo');
+
+
+
+
 function ShelfPage() {
 
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_SHELF_ITEMS' });
-  // }, []);
+ 
 
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -18,14 +26,13 @@ function ShelfPage() {
   const userId = useSelector(store => store.user.id);
 
 
-  const handleSubmit = () => {
-    let bundledObject = {
-      description: description,
-      image_url: imageUrl,
-      user_id: userId
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(imageUrl.name, 'and', userId);
+ 
+     
 
-    dispatch({type: 'ADD_ITEM', payload: bundledObject});
+    dispatch({type: 'ADD_ITEM', payload:{ imageUrl } });
 
     setDescription('');
     setImageUrl('');
@@ -34,16 +41,17 @@ function ShelfPage() {
   return (
     <div className="container">
       <h2>Shelf Form</h2>
-      <form onSubmit={handleSubmit}>
-        <input
+      <form onSubmit={handleSubmit} encType="multipart/form-data" >
+        {/* <input
           type="text"
           placeholder="enter name"
           onChange={(event) => setDescription(event.target.value)}
-        />
+        /> */}
         <input
-          type="text"
+          type='file'
+          name='file'
           placeholder="enter image url"
-          onChange={(event) => setImageUrl(event.target.value)}
+          onChange={(event) => setImageUrl(event.target.files[0])}
         />
 
         <button type="submit">Add to shelf!</button>

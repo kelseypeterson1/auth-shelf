@@ -1,12 +1,17 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const cloudinaryUpload = require('../modules/cloudinary-config');
 
 /**
  * Get all of the items on the shelf
  */
+
+
+// const upload = multer({ storage: storage })
+
 router.get('/', (req, res) => {
-  if (req.isAuthenticated()) {
+ 
     console.log('/shelf GET route');
     console.log('is authenticated?', req.isAuthenticated());
     console.log('user', req.user);
@@ -17,29 +22,31 @@ router.get('/', (req, res) => {
       console.log(error);
       res.sendStatus(500);
     });
-  } else {
-    res.sendStatus(403);
-  }
-});
+}); 
 
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
+router.post('/', cloudinaryUpload.single("image"), async (req, res) => {
   // endpoint functionality
-  if (req.isAuthenticated()) {
-    console.log(req.body);
-    console.log('is authenticated?', req.isAuthenticated());
-    console.log('user', req.user);
-    let queryText = `INSERT INTO "item" ("description", "image_url", "user_id") 
-    VALUES ($1, $2, $3);`
-    pool.query(queryText, [req.body.description, req.body.image_url, req.user.id])
-      .then(result => res.sendStatus(201))
+  // if (req.isAuthenticated()) {
+    console.log('niceeee req.file:', req.file.path)
+    console.log('server post', req.body);
+    // console.log('is authenticated?', req.isAuthenticated());
+    // console.log('path', req.file.image_url);
+    // const imageUrl = req.files.path;
+    // return res.json({ image_url: req.file.path });
+    const userId = req.user.id;
+
+    let queryText = `INSERT INTO "item" ( "image_url") 
+    VALUES ($1);`
+    pool.query(queryText, req.file.path)
+      .then(res => res.sendStatus(201))
       .catch(err => res.sendStatus(500));
 
-  } else {
-    res.sendStatus(403);
-  }
+  // } else {
+  //   res.sendStatus(403);
+  // }
 });
 
 /**
