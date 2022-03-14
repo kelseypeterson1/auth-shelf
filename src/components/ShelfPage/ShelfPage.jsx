@@ -4,19 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import ShelfList from '../ShelfList/ShelfList';
 import './ShelfPage.css';
 
-// // ========multer stuff===============
-// const multer  = require('multer')
-// const upload = multer({ dest: 'public/user' })
-
-// exports.uploadImage = upload.single('photo');
-
-
-
-
 function ShelfPage() {
 
  
-
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   
@@ -32,7 +22,7 @@ function ShelfPage() {
  
      
 
-    dispatch({type: 'ADD_ITEM', payload:{ imageUrl } });
+    dispatch({type: 'ADD_ITEM', payload:{ imageUrl, description } });
 
     setDescription('');
     setImageUrl('');
@@ -42,11 +32,11 @@ function ShelfPage() {
     <div className="container">
       <h2>Shelf Form</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data" >
-        {/* <input
+        <input
           type="text"
           placeholder="enter name"
           onChange={(event) => setDescription(event.target.value)}
-        /> */}
+        />
         <input
           type='file'
           name='file'
