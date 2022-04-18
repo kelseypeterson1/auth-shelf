@@ -1,10 +1,11 @@
 .shelfItemContainer {
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    background-color: aquamarine;
+    background-color: #22031F;
     padding: 10px;
     border-radius: 25px;
 }
