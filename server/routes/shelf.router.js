@@ -1,7 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const cloudinaryUpload = require('../modules/cloudinary-config');
+// const cloudinaryUpload = require('../modules/cloudinary-config');
+const multer = require('multer');
+const upload = multer ({dest: 'uploads/'})
+const { uploadFile, getFileStream } = require('../modules/cloudinary-config')
+const fs = require('fs')
+const util = require('fs')
+// const unlinkFile = util.promisixfy(fs.link)
+
 
 
 router.get('/', (req, res) => {
@@ -18,24 +25,42 @@ router.get('/', (req, res) => {
     });
 }); 
 
-router.post('/', cloudinaryUpload.single("image"), async (req, res) => {
+router.get('/testbucketstn/:key', (req, res) => {
+  console.log(req.params)
+  const key = req.params.key 
+  const readStream = getFileStream(key)
+
+  readStream.pipe(res)
+})
+
+router.post('/', upload.single("image"), async (req, res) => {
+  const file = req.file
+  console.log('file is', file);
+  const result = await uploadFile(file)
+  console.log('result is', result);
+  const description = req.body.description; 
+  res.send({imagePath: `/testbucketstn/${result.Key}`})
+
+
   // endpoint functionality
-  // if (req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     console.log('niceeee req.file:', req.file.path)
     console.log('server post description', req.body.description);
+    // console.log('location is', req.result.location);
     console.log('username', req.user.id);
 
 
     let queryText = `INSERT INTO "item" ( "description", "image_url", "user_id") 
     VALUES ($1, $2, $3);`;
     pool.query(queryText,  [ req.body.description, req.file.path, req.user.id])
-      .then(dbRes => res.sendStatus(201))
+      .then()
       .catch(err => { 
         console.log('erroris', err);
-        res.sendStatus(500);
+        // res.sendStatus(500);
       })
 
-  // } else {
+  } 
+  // else {
   //   res.sendStatus(403);
   // }
 });

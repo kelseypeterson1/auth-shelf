@@ -39,7 +39,7 @@ function ShelfPage() {
         />
         <input
           type='file'
-          name='file'
+          name='image'
           placeholder="enter image url"
           onChange={(event) => setImageUrl(event.target.files[0])}
         />
