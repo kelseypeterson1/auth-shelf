@@ -23,7 +23,7 @@ function ShelfItem({item}) {
             <img src ={item.image_url} />
             <button onClick={handleDelete}>delete</button>
         </div>
-        <img src='https://testbucketstn.s3.us-east-2.amazonaws.com/0a6e5c4d2b330e3f3e8a6d0bf5562298'></img>
+        <img src=''></img>
         </div>
     )
 }

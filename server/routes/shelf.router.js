@@ -36,10 +36,13 @@ router.get('/testbucketstn/:key', (req, res) => {
 router.post('/', upload.single("image"), async (req, res) => {
   const file = req.file
   console.log('file is', file);
+  // console.log('req file is ', req);
   const result = await uploadFile(file)
-  console.log('result is', result);
+  console.log('result location is', result.location);
   const description = req.body.description; 
   res.send({imagePath: `/testbucketstn/${result.Key}`})
+  const imageUrl = 'https://testbucketstn.s3.us-east-2.amazonaws.com/' + req.file.filename; 
+  console.log('imageurl is', imageUrl);
 
 
   // endpoint functionality
@@ -52,7 +55,7 @@ router.post('/', upload.single("image"), async (req, res) => {
 
     let queryText = `INSERT INTO "item" ( "description", "image_url", "user_id") 
     VALUES ($1, $2, $3);`;
-    pool.query(queryText,  [ req.body.description, req.file.path, req.user.id])
+    pool.query(queryText,  [ req.body.description, imageUrl, req.user.id])
       .then()
       .catch(err => { 
         console.log('erroris', err);
